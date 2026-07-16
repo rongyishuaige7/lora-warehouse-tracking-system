@@ -1,0 +1,54 @@
+# ===== Python / Flask =====
+__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local DB / data
+*.db
+*.sqlite
+*.sqlite3
+server/warehouse.db
+server/config.json
+
+# ===== Android / Gradle =====
+.idea/
+*.iml
+*.ipr
+*.iws
+.gradle/
+local.properties
+**/build/
+**/.cxx/
+**/captures/
+
+# ===== Arduino / ESP32 local configuration =====
+esp32_gateway/config.h
+esp32_tag/config.h
+!esp32_gateway/config.example.h
+!esp32_tag/config.example.h
+
+# ===== Arduino / PlatformIO =====
+.pio/
+*.elf
+*.hex
+*.bin
+*.map
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Runtime secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Test caches
+.coverage
+htmlcov/

@@ -1,0 +1,7 @@
+{
+  "db_path": "warehouse.db",
+  "gateway_ips": {
+    "A": "http://192.168.50.21",
+    "B": "http://192.168.50.22"
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android Network Security Config cannot express RFC1918 address ranges.
+  Cleartext transport is therefore enabled at the platform layer while
+  UrlUtils enforces loopback/emulator/RFC1918-only HTTP at the app boundary.
+  Use HTTPS for every non-local endpoint.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

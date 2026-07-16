@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">仓库追踪</string>
+    <string name="app_title">仓库物品追踪系统</string>
+    <string name="search_hint">搜索物品名称或编号</string>
+    <string name="region_overview">区域概览</string>
+    <string name="region_a">区域 A</string>
+    <string name="region_b">区域 B</string>
+    <string name="device_count">物品数量: %d</string>
+    <string name="device_list">物品列表</string>
+    <string name="locate">定位</string>
+    <string name="no_data">暂无物品数据</string>
+    <string name="loading">加载中...</string>
+    <string name="load_failed">加载失败</string>
+    <string name="locate_success">定位成功</string>
+    <string name="locate_failed">定位失败</string>
+    <string name="network_error">网络错误</string>
+    <string name="server">服务器</string>
+    <string name="refresh">刷新</string>
+    <string name="server_settings">服务器设置</string>
+    <string name="server_url_hint">例如: http://192.168.50.10:5000/</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="reset">重置</string>
+    <string name="base_url_saved">服务器地址已保存</string>
+    <string name="base_url_reset">已恢复默认服务器地址</string>
+    <string name="base_url_invalid">请输入 HTTPS 地址，或可信局域网/回环 HTTP 地址</string>
+    <string name="filter_region_on">已筛选区域: %1$s</string>
+    <string name="filter_region_off">已取消区域筛选</string>
+</resources>
