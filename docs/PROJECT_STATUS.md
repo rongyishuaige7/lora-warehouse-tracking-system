@@ -67,3 +67,9 @@ Source-confirmed · Tag firmware build-verified · Gateway firmware build-verifi
 ```
 
 Do not use “hardware verified”, “production ready”, “industrial grade”, “secure tracking”, “accurate positioning” or an online-status badge.
+
+## Historical media and EDA added on 2026-07-18
+
+sanitized historical photo(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+
+This publication update adds historical evidence only. Current hardware re-test not run.

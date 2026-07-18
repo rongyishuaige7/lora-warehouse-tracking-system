@@ -9,6 +9,15 @@
 
 > **安全边界：** API、网关控制端点与 LoRa 消息均无认证或加密。本项目只适合隔离的可信局域网和教学环境，禁止直接暴露公网，也不能作为真实资产安全系统、工业级定位系统或生产服务使用。
 
+## Historical material evidence (2026-07-18 publication)
+
+sanitized historical photo(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+
+![Historical LoRa tag/gateway prototype, 2026-04-08](assets/photos/historical-prototype.jpg)
+
+Historical media/EDA do not prove that the current public commit was flashed or re-tested on hardware. **Current hardware re-test not run.**
+
+
 ## 系统闭环
 
 ```text
