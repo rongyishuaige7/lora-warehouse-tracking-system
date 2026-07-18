@@ -1,75 +1,75 @@
-# Project status
+# 项目状态
 
-Status date: 2026-07-17
+状态日期：2026-07-17
 
-## Evidence levels
+## 证据等级
 
-| Level | Status | Meaning |
+| 等级 | 状态 | 含义 |
 |---|---|---|
-| Source-confirmed | PASS | Desktop source was selected as the latest candidate and compared with the historical ZIP baseline |
-| Tag firmware build-verified | PASS | PlatformIO `tag` environment builds from example configuration |
-| Gateway firmware build-verified | PASS | PlatformIO `gateway` environment builds from example configuration |
-| Server tests | PASS | Flask server has 11 passing pytest tests |
-| Android build-verified | PASS | JVM unit tests and Debug APK assembly pass |
-| Historically demonstrated | UNKNOWN | No public-ready photo, screenshot or video was found in the reviewed source/archive |
-| Hardware re-verified | NOT RUN | The candidate commit has not been flashed and tested end to end on the physical prototype |
-| EDA/manufacturing available | NO | No schematic, PCB, Gerber, enclosure or manufacturing source was found |
+| 源码已确认 | 通过 | 已选定桌面源码作为最新候选，并与历史 ZIP 基线对比 |
+| 标签固件构建已验证 | 通过 | PlatformIO `tag` 环境可从示例配置构建 |
+| 网关固件构建已验证 | 通过 | PlatformIO `gateway` 环境可从示例配置构建 |
+| 服务端测试 | 通过 | Flask 服务端的 11 个 pytest 测试通过 |
+| Android 构建已验证 | 通过 | JVM 单元测试和 Debug APK 组装通过 |
+| 历史演示 | 未知 | 审查过的源码/归档中未找到可公开的照片、截图或视频 |
+| 真机复测 | 未执行 | 候选提交尚未烧录到实体原型并完成端到端测试 |
+| EDA/制造资料可用性 | 无 | 未找到原理图、PCB、Gerber、外壳或制造源文件 |
 
-## What is confirmed
+## 已确认内容
 
-- Source contains an ESP32 tag, ESP32 LoRa/Wi-Fi gateway, Flask/SQLite server and Kotlin Android app.
-- Both firmware targets build with the pinned `espressif32@6.13.0` PlatformIO environment.
-- The server stores the **receiving gateway region** as authoritative, with tag region only as an unknown-gateway fallback.
-- Multi-gateway reports received within three seconds retain the stronger RSSI observation.
-- Battery measurement is not implemented and now reports `null`; failed DHT reads also report `null` rather than a fabricated zero.
-- `/api/locate` no longer blocks for a false QUERY wake flow and does not claim the tag received or played audio.
-- Android uses `minSdk 23`, defaults to emulator host `10.0.2.2`, and restricts cleartext HTTP URLs to loopback/emulator/RFC1918 hosts.
-- Real Wi-Fi and LAN configuration is absent from the release candidate.
+- 源码包含 ESP32 标签、ESP32 LoRa/Wi-Fi 网关、Flask/SQLite 服务端和 Kotlin Android 应用。
+- 两个固件目标均可用固定的 `espressif32@6.13.0` PlatformIO 环境构建。
+- 服务端以**接收网关上报的区域**为权威；标签区域仅在网关区域未知时作为回退。
+- 同一标签在三秒内被多个网关接收时，保留 RSSI 更强的观测。
+- 尚未实现电池测量，现返回 `null`；DHT 读取失败同样返回 `null`，不再伪造为零。
+- `/api/locate` 不再因虚假的 QUERY 唤醒流程阻塞，也不声称标签已收到命令或播放音频。
+- Android 使用 `minSdk 23`，默认模拟器主机为 `10.0.2.2`，并将明文 HTTP URL 限制为回环地址、模拟器或 RFC1918 主机。
+- 发布候选中未包含真实 Wi-Fi 和局域网配置。
 
-## Source-level corrections made for publication
+## 为公开发布作出的源码级修正
 
-### Location authority
+### 位置权威来源
 
-Historical code preferred the tag's self-declared region. The public candidate follows the product mechanism: the receiving gateway region is authoritative. This is verified by an automated server test, not by current radio-range hardware testing.
+历史代码优先使用标签自行声明的区域。公开候选遵循产品机制：以接收网关的区域为权威。此项由自动化服务端测试验证，并非当前无线距离的真机测试。
 
-### Deep-sleep command semantics
+### 深度睡眠命令语义
 
-Historical documentation claimed `QUERY` could wake a sleeping tag. Current firmware only enables timer, GPIO33 and GPIO13 wake sources; LoRa DIO0 is not included. The candidate now states that `QUERY` requests a report only while a tag is already awake.
+历史文档曾声称 `QUERY` 可以唤醒休眠标签。当前固件仅启用定时器、GPIO33 和 GPIO13 唤醒源，未包含 LoRa DIO0。候选版本现明确：`QUERY` 仅在标签已经唤醒时请求报告。
 
-### Sensor unavailable semantics
+### 传感器不可用时的语义
 
-Historical firmware reported a fixed 3.7 V battery value and converted DHT failures to zero. The candidate reports JSON `null` and displays `N/A`. This is a truthfulness fix; no battery sensing circuit was added.
+历史固件上报固定的 3.7 V 电池值，并将 DHT 失败转换为零。候选版本上报 JSON `null` 并显示 `N/A`。这是事实准确性修正，未新增电池检测电路。
 
-### Configuration and transport boundary
+### 配置与传输边界
 
-Historical private LAN addresses were removed. Flask browser CORS is disabled by default. The Android client accepts public hosts only over HTTPS and limits HTTP to local/private hosts. None of these changes adds API or LoRa authentication.
+已移除历史私有局域网地址。Flask 浏览器 CORS 默认禁用。Android 客户端仅通过 HTTPS 接受公网主机，并将 HTTP 限制为本地/私有主机。这些改动均未增加 API 或 LoRa 认证。
 
-## Known limitations
+## 已知限制
 
-- Current end-to-end hardware re-test not run.
-- No photos, video, App screenshots, EDA or manufacturing sources.
-- No API authentication, gateway-control authentication, TLS, LoRa encryption or replay protection.
-- `/api/locate` only confirms HTTP dispatch to a configured gateway; tag delivery/playback is unconfirmed.
-- Deep-sleep tags cannot receive LoRa commands until another configured wake source activates them.
-- Battery sensing, charging circuit, deep-sleep current and power budget are unknown.
-- DHT11 is slow and can return unavailable data; `null` must remain distinct from a real zero.
-- Android A/B cards are static even though the backend can store other region strings.
-- `esp32dev` is a reproducible build target, not a confirmed physical board identity.
-- 433 MHz regulatory compliance, actual module frequency and antenna match are not verified.
-- Python dependency ranges and Android Maven dependencies are not a complete offline lockfile.
+- 当前未进行端到端真机复测。
+- 未公开照片、视频、应用截图、EDA 或制造源文件。
+- 没有 API 认证、网关控制认证、TLS、LoRa 加密或重放保护。
+- `/api/locate` 仅确认 HTTP 已发送至已配置网关；标签是否收到/播放尚未确认。
+- 深度睡眠标签在其他配置的唤醒源激活前无法接收 LoRa 命令。
+- 电池检测、充电电路、深度睡眠电流和功耗预算均未知。
+- DHT11 速度较慢且可能返回不可用数据；`null` 必须与真实零值区分。
+- 虽然后端可存储其他区域字符串，Android A/B 卡片仍是静态的。
+- `esp32dev` 是可复现构建目标，不是已确认的实体开发板型号。
+- 433 MHz 合规性、实际模块频率和天线匹配尚未验证。
+- Python 依赖范围和 Android Maven 依赖不是完整离线锁文件。
 
-## Status wording rule
+## 状态表述规则
 
-Until current physical evidence is added, public descriptions must use:
+在补充当前实体证据前，公开描述必须使用：
 
 ```text
-Source-confirmed · Tag firmware build-verified · Gateway firmware build-verified · Server tests passed · Android unit test and debug build passed · Current end-to-end hardware re-test not run
+源码已确认 · 标签固件构建已验证 · 网关固件构建已验证 · 服务端测试通过 · Android 单元测试和调试构建通过 · 当前未进行端到端真机复测
 ```
 
-Do not use “hardware verified”, “production ready”, “industrial grade”, “secure tracking”, “accurate positioning” or an online-status badge.
+不得使用“已真机验证”“生产就绪”“工业级”“安全追踪”“精确定位”或在线状态徽章。
 
-## Historical media and EDA added on 2026-07-18
+## 2026-07-18 新增的历史素材与 EDA
 
-sanitized historical photo(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+已脱敏的历史照片和历史 EDA 衍生文件。日期、脱敏处理、未公开材料和证据边界见 [MEDIA_EVIDENCE](MEDIA_EVIDENCE.md)。
 
-This publication update adds historical evidence only. Current hardware re-test not run.
+本次发布仅新增历史证据。当前未进行真机复测。

@@ -7,11 +7,10 @@ ESP32 warehouse-region tracking prototype with LoRa tag/gateway firmware,
 Flask/SQLite storage, and a Kotlin Android client.
 
 **Stack:** ESP32 · LoRa/SX1278 · C++ · PlatformIO · Flask · SQLite · Kotlin
-**Evidence:** source-confirmed · tag/gateway builds passed · 11 server tests
-passed · Android unit test and debug build passed · current end-to-end hardware
-re-test not run
-**Boundaries:** no photos/video/App screenshots or EDA · trusted-LAN-only HTTP
-without auth/TLS · LoRa has no authentication/ACK · QUERY cannot wake deep sleep
+**证据：** 源码已确认 · 标签/网关构建通过 · 11 个服务端测试通过 ·
+Android 单元测试和调试构建通过 · 当前未进行端到端真机复测
+**边界：** 无照片/视频/应用截图或 EDA · 仅可信局域网 HTTP，
+无认证/TLS · LoRa 无认证/ACK · QUERY 不能唤醒深度睡眠标签
 ```
 
 Keep evidence synchronized with `PROJECT_STATUS.md` and `VERIFICATION.md`. Replace generic build evidence with an exact Actions URL only after the remote workflow succeeds.
