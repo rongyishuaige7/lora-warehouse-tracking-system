@@ -15,4 +15,4 @@ Android 单元测试和调试构建通过 · 当前未进行端到端真机复�
 
 Keep evidence synchronized with `PROJECT_STATUS.md` and `VERIFICATION.md`. Replace generic build evidence with an exact Actions URL only after the remote workflow succeeds.
 
-- **历史媒体 / EDA：** 已加入经脱敏的历史衍生材料；范围和版本差异见 [`MEDIA_EVIDENCE.md`](MEDIA_EVIDENCE.md)。它们不证明当前公开提交已完成真机复测。
+- **项目素材：** 已补充项目照片、界面截图和相关资料；范围和版本差异见 [`MEDIA_EVIDENCE.md`](MEDIA_EVIDENCE.md)。
