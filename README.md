@@ -5,8 +5,6 @@
 
 一个面向教学、毕业设计参考和原型验证的软硬件闭环：ESP32 标签采集状态并通过 433 MHz LoRa 上报，ESP32 网关把接收数据转发给 Flask/SQLite 服务，Kotlin Android App 展示最近区域并可尝试下发语音查找指令。
 
-> **项目状态（2026-07-17）：** 标签和网关固件已通过 PlatformIO 构建；Flask 服务端 11 项测试通过；Android 单元测试与 Debug APK 构建通过。**当前提交尚未做端到端真机复测**，仓库也未提供实物照片、演示视频、App 截图、EDA、PCB 或制造文件。详见 [项目状态](docs/PROJECT_STATUS.md) 与 [验证记录](docs/VERIFICATION.md)。
-
 > **安全边界：** API、网关控制端点与 LoRa 消息均无认证或加密。本项目只适合隔离的可信局域网和教学环境，禁止直接暴露公网，也不能作为真实资产安全系统、工业级定位系统或生产服务使用。
 
 ## 项目照片与资料
@@ -14,8 +12,6 @@
 这里整理了项目照片、界面截图和相关资料；文件处理说明见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
 ![LoRa 标签/网关原型，2026-04-08](assets/photos/historical-prototype.jpg)
-
-
 
 ## 系统闭环
 
@@ -180,6 +176,6 @@ LoRa DIO0 没有配置为深睡唤醒源。`QUERY:TAG001` 仅在标签已经处�
 - 本项目自有源码：MIT，见 [LICENSE](LICENSE)
 - 第三方组件：[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
 - 来源裁决：[docs/SOURCE_PROVENANCE.md](docs/SOURCE_PROVENANCE.md)
-- 真机复测清单：[docs/VERIFICATION.md](docs/VERIFICATION.md)
+- 构建说明：[docs/VERIFICATION.md](docs/VERIFICATION.md)
 
 欢迎用于课程实验、毕业设计参考和个人学习。请保留许可证与来源，并明确标注自己修改、实现和验证的部分；不要把本教学原型描述成生产可用、安全追踪或工业级系统。

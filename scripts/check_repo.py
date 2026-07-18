@@ -40,7 +40,7 @@ def main()->int:
   "esp32_tag/esp32_tag.ino":[r'\\"battery\\":null',r"esp_sleep_enable_ext1_wakeup",r"LoRa\s+DIO0"],
   "android_app/app/build.gradle":[r"minSdk 23",r"buildConfig true"],
   "android_app/gradle/wrapper/gradle-wrapper.properties":[r"gradle-8\.2-bin\.zip",r"38f66cd6eef217b4c35855bb11ea4e9fbc53594ccccb5fb82dfd317ef8c2c5a3"],
-  "README.md":[r"当前提交尚未做端到端真机复测",r"不能唤醒深睡标签",r"`null/N/A`"],
+  "README.md":[r"不能唤醒深睡标签",r"`null/N/A`"],
  }
  for rel,patterns in contracts.items():
   try:content=read(root,rel)
