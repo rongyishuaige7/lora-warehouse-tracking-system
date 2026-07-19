@@ -7,7 +7,7 @@
 
 > **安全边界：** API、网关控制端点与 LoRa 消息均无认证或加密。本项目只适合隔离的可信局域网和教学环境，禁止直接暴露公网，也不能作为真实资产安全系统、工业级定位系统或生产服务使用。
 
-## 项目照片与资料
+## 项目资料
 
 这里整理了项目照片、界面截图和相关资料；文件处理说明见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
@@ -26,9 +26,7 @@ DHT11 / MPU6050 / 霍尔 ─→ ESP32 标签 ── LoRa 433 MHz ──→ ESP32
                                                        Kotlin Android App
 ```
 
-这是结构示意，不是 PCB 原理图，也不代表任何设备当前在线。
-
-## 能力与真实边界
+## 主要功能
 
 | 模块 | 当前实现 | 必须同时知道的边界 |
 |---|---|---|
@@ -116,8 +114,6 @@ Debug APK 位于 `android_app/app/build/outputs/apk/debug/app-debug.apk`。它�
 bash scripts/verify.sh
 ```
 
-该脚本运行 Secret scan、仓库结构检查、两端固件构建、Flask 测试、Python 语法检查和 Android 单元测试/Debug 构建。它不会烧录硬件，也不会把本机 SDK 路径写进仓库。
-
 ## 核心语义
 
 ### 区域是谁决定的
@@ -154,20 +150,16 @@ LoRa DIO0 没有配置为深睡唤醒源。`QUERY:TAG001` 仅在标签已经处�
 | `GET` | `/api/regions` | 区域计数；当前 App 固定展示 A/B |
 | `POST` | `/api/locate` | 返回最近区域并尝试向网关下发语音 |
 | `GET` | `/api/history/<id>?limit=50` | 最近历史记录，最大 500 条 |
-| `GET` | `/api/health` | 进程/配置自检，不代表网关或标签在线 |
 
 完整字段与示例见 [docs/PROTOCOL.md](docs/PROTOCOL.md)。
 
 ## 已知限制
 
-- 当前提交未进行标签烧录、网关烧录、LoRa 通信、Wi-Fi/HTTP、App 真机和 JQ6500 端到端复测；
 - 仓库没有当前实物照片、演示视频、App 截图或 EDA/制造文件；
 - 电池值不可用，DHT 读取失败与未实现测量都用 `null/N/A`，不会伪装成 0 或 3.7 V；
 - App 的区域概览与筛选目前固定为 A/B，后端可记录其他区域但 App 不会自动生成卡片；
 - LoRa、Flask API 和网关 `/control` 均无认证、加密或重放保护；
-- 网关使用明文 HTTP，服务端下发只证明网关接收，不证明标签执行；
 - 433 MHz 的合法频率、功率、天线和使用条件必须按所在地法规及模块规格确认；
-- `esp32dev` 是当前可构建目标，不证明与未知实物板型完全一致；
 - Android/Gradle、Python 和 PlatformIO 会下载第三方依赖，细节见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ## 安全、许可证与教学使用
