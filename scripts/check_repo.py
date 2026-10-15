@@ -63,7 +63,7 @@ def main()->int:
  ]]:
   try:content=read(root,rel)
   except (OSError,UnicodeError):continue
-  if "/home/rongyi/" in content or "/mnt/shared/" in content:
+  if re.search(r"/(?:Users|home)/[A-Za-z0-9_.-]+/", content) or "/mnt/shared/" in content:
    errors.append(f"private absolute path remains in public documentation: {rel}")
  if errors:
   print("Repository check: FAIL",file=sys.stderr)
